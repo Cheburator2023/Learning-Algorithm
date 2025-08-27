@@ -12,7 +12,7 @@ public class BaseJava4 {
 //        System.out.println(binarySearch(nums1,4));
 //        System.out.println(Arrays.toString(firstAndLast(nums4,7)));
 //        System.out.println(findTarget(nums1, 0));
-        mergeSort(nums5);
+        quickSort(nums5);
         System.out.println(Arrays.toString(nums5));
     }
 
@@ -160,17 +160,54 @@ public class BaseJava4 {
         }
     }
 
-    public static void QuickSort(int[] nums) {
-        if (nums == null || nums.length <= 1) {
+    // Основной метод для сортировки
+    public static void quickSort(int[] arr) {
+        if (arr == null || arr.length <= 1) {
             return;
         }
-
-        quickSort(nums, 0, nums.length-1);
+        quickSort(arr, 0, arr.length - 1);
     }
 
-    private static void quickSort(int[] nums, int low, int high) {
+    // Рекурсивный метод сортировки
+    private static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
+            // Разделяем массив и получаем индекс опорного элемента
+            int pivotIndex = partition(arr, low, high);
 
+            // Рекурсивно сортируем левую и правую части
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
         }
+    }
+
+    // Метод для разделения массива
+    private static int partition(int[] arr, int low, int high) {
+        // Выбираем опорный элемент (последний элемент)
+        int pivot = arr[high];
+
+        // Индекс для элемента, который меньше pivot
+        int i = low - 1;
+
+        // Проходим по всем элементам от low до high-1
+        for (int j = low; j < high; j++) {
+            // Если текущий элемент меньше или равен pivot
+            if (arr[j] <= pivot) {
+                i++;
+                // Меняем местами arr[i] и arr[j]
+                swap(arr, i, j);
+            }
+        }
+
+        // Помещаем pivot на правильную позицию
+        swap(arr, i + 1, high);
+
+        return i + 1; // Возвращаем индекс pivot
+    }
+
+    // Вспомогательный метод для обмена элементов
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
