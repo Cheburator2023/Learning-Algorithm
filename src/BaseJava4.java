@@ -210,4 +210,35 @@ public class BaseJava4 {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+    public static void QuickSort1(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        quickSort1(nums,0,nums.length - 1);
+    }
+
+    private static void quickSort1(int[] nums, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition1(nums, low, high);
+        }
+    }
+
+    private static int partition1(int[] nums, int low, int high) {
+        int pivot = nums[high];
+        int i = low - 1;
+        for(int j = low; j < high; j++) {
+            if(nums[j] <= pivot) {
+                i++;
+                swap1(nums,i,j);
+            }
+        }
+        return 0;
+    }
+
+    private static void swap1(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 }
