@@ -12,7 +12,7 @@ public class BaseJava4 {
 //        System.out.println(binarySearch(nums1,4));
 //        System.out.println(Arrays.toString(firstAndLast(nums4,7)));
 //        System.out.println(findTarget(nums1, 0));
-        quickSort(nums5);
+        mergeSort(nums5);
         System.out.println(Arrays.toString(nums5));
     }
 
@@ -209,5 +209,38 @@ public class BaseJava4 {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+    }
+    public static void quickSort1(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return;
+        }
+        quickSort1(nums, 0, nums.length - 1);
+    }
+
+    private static void quickSort1(int[] nums, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition1(nums, low, high);
+            quickSort1(nums, low, pivotIndex - 1);
+            quickSort1(nums, pivotIndex + 1, high);
+        }
+    }
+
+    private static int partition1(int[] nums, int low, int high) {
+        int pivot = nums[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (nums[j] <= pivot) {
+                i++;
+                swap1(nums, i, j);
+            }
+        }
+        swap1(nums, i + 1, high);
+        return i + 1;
+    }
+
+    private static void swap1(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
