@@ -2,16 +2,49 @@ import java.util.*;
 
 public class BaseJava7 {
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3, 4, 5, 5, 6, 7};
-        int[] nums1 = {};
+        int[] nums = {7, 1, 9, 3, 4, 1, 5, 6, 9};
+        int[] nums1 = {2,1};
         int[] nums2 = {1, 2, 3, 4, 5, 6, 7};
 //        System.out.println(isContainsDuplicate2(nums));
 //        System.out.println(isContainsDuplicate2(nums1));
 //        System.out.println(isContainsDuplicate2(nums2));
-        System.out.println(isAnagram1("cat", "tac"));
-        System.out.println(isAnagram1("cat", "dog"));
-        System.out.println(isAnagram1("cat", "c at"));
+//        System.out.println(isAnagram1("cat", "tac"));
+//        System.out.println(isAnagram1("cat", "dog"));
+//        System.out.println(isAnagram1("cat", "c at"));
+        System.out.println(bestTimeToBuyAndSellStock(nums));
+        System.out.println(bestTimeToBuyAndSellStock(nums1));
+        System.out.println(bestTimeToBuyAndSellStock1(nums));
+        System.out.println(bestTimeToBuyAndSellStock1(nums1));
 
+    }
+
+    public static int bestTimeToBuyAndSellStock(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
+        int maxProfit = 0;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] > nums[i]) {
+                    maxProfit = Math.max(maxProfit,nums[j] - nums[i]);
+                }
+            }
+        }
+        return maxProfit;
+    }
+
+    public static int bestTimeToBuyAndSellStock1(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
+        int maxProfit = 0;
+        int minPrice = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            minPrice = Math.min(minPrice, nums[i]);
+            int profit = nums[i] - minPrice;
+            maxProfit = Math.max(maxProfit, profit);
+        }
+        return maxProfit;
     }
 
     public static boolean isContainsDuplicate(int[] nums) {
