@@ -9,13 +9,60 @@ public class BaseJava8 {
 //        int[] nums = {1, 2, 3, 1};
 //        int[] nums1 = {1, 2, 3, 1, 2, 3};
 //        int[] nums2 = {1, 1};
+        int[] nums = {7, 1, 9, 3, 4, 1, 5, 6, 9};
+        int[] nums1 = {2,1};
+        int[] nums2 = {1, 2, 3, 4, 5, 6, 7};
 //        System.out.println(containsDuplicate1(nums, 3));
 //        System.out.println(containsDuplicate1(nums1, 2));
 //        System.out.println(containsDuplicate1(nums2, 1));
-        String[] s = {"h", "e", "l", "l", "o"};
-        String[] s1 = {"h", "e", "l", "l", "o", "!"};
-        reverseString(s);
-        reverseString(s1);
+//        char[] s = {'h', 'e', 'l', 'l', 'o'};
+//        char[] s1 = {'h', 'e', 'l', 'l', 'o', '!'};
+//        reverseString(s);
+//        reverseString(s1);
+//        System.out.println(Arrays.toString(s));
+//        System.out.println(Arrays.toString(s1));
+        System.out.println(bestTimeToBuyAndSellStockII(nums));
+        System.out.println(fibonacciNumber(2));
+    }
+
+    public static int fibonacciNumber(int n) {
+        if (n < 0) {
+            return 0;
+        }
+        if (n <= 1) {
+            return n;
+        }
+        return fibonacciNumber(n - 1) + fibonacciNumber(n - 2);
+    }
+
+    public static int fibonacciNumber1(int n) {
+        if (n < 0) {
+            return 0;
+        }
+        if (n <= 2) {
+            return 1;
+        }
+        int a = 0, b = 1;
+        for (int i = 2; i <= n; i++) {
+            int next = a + b;
+            a = b;
+            b = next;
+        }
+
+        return b;
+    }
+
+    public static int bestTimeToBuyAndSellStockII(int[] nums) {
+        if (nums == null || nums.length <= 1) {
+            return 0;
+        }
+        int maxProfit = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i-1]) {
+                maxProfit += nums[i] - nums[i-1];
+            }
+        }
+        return maxProfit;
     }
 
     public static int binarySearch(int[] nums, int target) {
@@ -99,16 +146,17 @@ public class BaseJava8 {
         return false;
     }
 
-    public static void reverseString(String[] s) {
+    public static void reverseString(char[] s) {
         if (s == null || s.length == 0) {
             return;
         }
-        int left = 0, rigth = s.length - 1;
+        int left = 0, right = s.length - 1;
         for (int i = 0; i < s.length/2 ; i++) {
-            String temp = s[left];
-            s[left++] = s[rigth];
-            s[rigth--] = temp;
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+            left++;
+            right--;
         }
-        System.out.println(Arrays.toString(s));
     }
 }
