@@ -4,12 +4,11 @@ public class BaseJava9 {
     public static void main(String[] args) {
         String s = "cbaebabacd";
         String p = "abc";
-        //char[][] grid = {{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'}, {'0', '0', '0', '1', '1'}};
-        //char[][] grid1 = {{'1'}, {'1', '1', '0', '0', '0'}, {'0', '1', '0'}, {'1', '0',}, {'1'}};
+        char[][] grid = {{'1', '1', '0', '0', '0'}, {'1', '1', '0', '0', '0'}, {'0', '0', '1', '0', '0'}, {'0', '0', '0', '1', '1'}};
         String s1 = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";
         //System.out.println(findAnagrams(s,p));
         //System.out.println(numIslands(grid));
-        //System.out.println(numIslands(grid1));
+        System.out.println(numIslands(grid));
         System.out.println(findRepeatedDnaSequences(s1));
     }
 
@@ -43,12 +42,31 @@ public class BaseJava9 {
             int m = grid[i].length;
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == '1') {
-                    dFS(grid, i, j);
                     count++;
+                    dfs(grid, i, j);
                 }
             }
         }
         return count;
+    }
+
+    private static void dfs(char[][] grid, int i, int j) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        // Проверка границ и условия воды/уже посещенной ячейки
+        if (i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] != '1') {
+            return;
+        }
+
+        // Помечаем ячейку как посещенную (изменяем на '0')
+        grid[i][j] = '0';
+
+        // Рекурсивно посещаем всех соседей (4 направления)
+        dfs(grid, i - 1, j); // Вверх
+        dfs(grid, i + 1, j); // Вниз
+        dfs(grid, i, j - 1); // Влево
+        dfs(grid, i, j + 1); // Вправо
     }
 
     private static void dFS(char[][] grid, int width, int depth) {
