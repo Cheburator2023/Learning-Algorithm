@@ -11,8 +11,10 @@ public class BaseJava9 {
         System.out.println(numIslands(grid));
         System.out.println(findRepeatedDnaSequences(s1));
         int[] stones = {2,7,4,1,8,1};
+        int[] stones1 = {2,2,1,3,5,3};
         System.out.println(findAnagrams(s,p));
         System.out.println(lastStoneWeight(stones));
+        System.out.println(lastStoneWeight(stones1));
     }
 
     public static List<String> findRepeatedDnaSequences(String s) {
