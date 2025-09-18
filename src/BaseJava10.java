@@ -2,7 +2,7 @@ import java.util.*;
 
 public class BaseJava10 {
     public static void main(String[] args) {
-        int[] nums = {4, 5, 6, 7, 8, 9, 10, 0, 1, 2, 3};
+        int[] nums = {1,8,6,2,5,4,8,3,7};
         int[][] intervals = {{1, 3}, {0, 9}, {8, 10}, {15, 18}};
         int[][] intervals1 = {{0, 4}, {1, 5}, {8, 10}, {15, 18}};
         int[][] matrix = {{1,4,7,11,15},{2,5,8,12,19},{3,6,9,16,22},{10,13,14,17,24},{18,21,23,26,30}};
@@ -11,8 +11,29 @@ public class BaseJava10 {
 //        printArrays(merge(intervals));
 //        System.out.println();
 //        printArrays(merge(intervals1));
-        System.out.println(searchMatrix1(matrix,target));
+        //System.out.println(searchMatrix1(matrix,target));
+        System.out.println(maxArea(nums));
     }
+
+
+    public static int maxArea(int[] height) {
+        if(height == null || height.length == 0) {
+            return 0;
+        }
+        int left = 0, right = height.length - 1;
+        int result = 0;
+        while (left<right) {
+            int current = Math.min(height[left], height[right]) * (right - left);
+            result = Math.max(result, current);
+            if(height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return result;
+    }
+
 
     public static boolean searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length < 1) {
@@ -32,6 +53,10 @@ public class BaseJava10 {
 
     public static boolean searchMatrix1(int[][] matrix, int target) {
         if (matrix == null || matrix.length < 1) {
+            return false;
+        }
+
+        if (matrix[0][0] > target || matrix[matrix.length - 1][matrix[matrix.length - 1].length - 1] < target) {
             return false;
         }
 
